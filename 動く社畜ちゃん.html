@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'/>
+    <title>動く社畜ちゃん</title>
+    <style>
+      canvas{
+        background: pink;
+      }
+    </style>
+    <script>
+var context;
+
+var image = new Image();
+image.src = 'shachiku.png';
+var yoko = 270;
+var tate = 220;
+var move = 0;
+
+function moveShachiku(){
+  if( tate < 100 ){
+    move = 4;
+  }
+  
+  tate = tate + move;
+  if( tate > 220  ){
+    tate = 220;
+    move = 0;
+  }
+}
+
+function start(){
+  var canvas = document.getElementById('canvas');
+  context = canvas.getContext('2d');
+  canvas.addEventListener('click', function(e){
+    if (move == 0) {
+      move = -4;
+    }
+  });
+
+  loop();
+}
+
+function loop(){
+  moveShachiku();
+  context.clearRect(0, 0, 640, 360);
+  context.drawImage(image, yoko, tate);
+  window.requestAnimationFrame(loop);
+}
+    </script>
+  </head>
+  <body onload='start()'>
+    <canvas id='canvas' width='640' height='360'></canvas>
+  </body>
+</html>
