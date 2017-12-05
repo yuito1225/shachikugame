@@ -1,33 +1,33 @@
   'use strict';
     var context;
-    
-    var image = new Image(); 
-    image.src = 'shachiku.png';
+
+    var image = new Image();
+    image.src = 'img/shachiku.png';
     var yoko = 270;
     var tate = 220;
     var move = 0;
-    
+
     var enemyImage = new Image();
-    enemyImage.src = 'enemy.png';
+    enemyImage.src = 'img/enemy.png';
     var enemyYoko = 0;
     var enemyTate = 330;
     var enemyMove = 5;
     var gameover = 0;
-    
+
     function checkHit(){
       var sx1 = yoko;
       var sx2 = yoko + 100;
       var ex1 = enemyYoko;
       var ex2 = enemyYoko + 43;
       var ashi = tate + 140;
-    
+
       if( sx1 < ex2 && ex1 < sx2 ){
         if( ashi > 330 ){
           gameover = 1;
         }
       }
     }
-    
+
     function fireEnemy(){
       var rand = Math.floor(Math.random() * 2);
       if( rand == 1 ){
@@ -38,7 +38,7 @@
         enemyMove = -5;
       }
     }
-    
+
     function moveShachiku(){
       if( tate < 100 ){
         move = 4;
@@ -49,7 +49,7 @@
         move = 0;
       }
     }
-    
+
     function start(){
       var canvas = document.getElementById('canvas');
       context = canvas.getContext('2d');
@@ -60,10 +60,10 @@
       });
       loop();
     }
-    
+
     function loop(){
       moveShachiku();
-    
+
       if( enemyMove == 0 ){
         fireEnemy();
       }
@@ -75,7 +75,7 @@
       context.drawImage(image, yoko, tate);
       context.drawImage(enemyImage, enemyYoko, enemyTate);
       checkHit();
-    
+
       if( gameover == 1 ){
         context.fillText('ゲームオーバー！', 50, 100);
       }else{
